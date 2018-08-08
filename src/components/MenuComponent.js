@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
+import DishDetail  from './DishDetailComponent'
 
 class Menu extends Component {
 
@@ -9,7 +10,12 @@ class Menu extends Component {
         this.state = {
             selectedDish: null
         };
+        console.log('Menu component constructor invoked');
 
+    }
+
+    componentDidMount() {
+        console.log('Menu component componentDidMount is invoked');
     }
 
     onDishSelect(dish) {
@@ -21,15 +27,34 @@ class Menu extends Component {
     renderDish(dish) {
         if (dish != null){
             return(
-                <Card>
-                     <CardImg width="100%" src={dish.image} alt={dish.name} />
-                     <CardBody>
-                            <CardTitle>
-                                {dish.name}
-                            </CardTitle>
-                            <CardText>{dish.description}</CardText>
-                     </CardBody>
-                </Card>
+                <DishDetail dish={dish}/>
+            );
+        } else {
+            return (<div></div>);
+        }
+    }
+
+    renderComments(dish) {
+        if (dish != null) {
+            return(
+                <div className="col-12 col-md-5 m-1">
+                    <h4>Comments</h4>
+                    {dish.comments.map(function(comment){
+                    return(
+                            <div>
+                                <div>{comment.comment}</div>
+                                <div>--{comment.author}, &nbsp; 
+                                {new Intl.DateTimeFormat('en-US', { 
+                                    year: 'numeric', 
+                                    month: 'long', 
+                                    day: '2-digit' 
+                                    }).format(new Date(comment.date))}
+                                </div>
+                                <br />
+                            </div>
+                        );
+                    })}
+                </div>
             );
         } else {
             return (<div></div>);
@@ -51,11 +76,12 @@ class Menu extends Component {
                             <p>{dish.description}</p>
                         </CardImgOverlay>
                     </Card>
-                    
                 </div>
                 );
             }
         );
+
+        console.log('Menu component render is invoked');
 
         return(
             <div className="container">
@@ -64,6 +90,7 @@ class Menu extends Component {
                 </div>
                 <div className="row">
                     {this.renderDish(this.state.selectedDish)}
+                    {this.renderComments(this.state.selectedDish)}
                 </div>
             </div>
         );
