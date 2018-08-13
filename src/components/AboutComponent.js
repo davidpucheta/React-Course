@@ -4,9 +4,21 @@ import { Link } from 'react-router-dom';
 
 function About(props) {
 
-    const leaders = props.leaders.map((leader) => {
+    const leaders = props.leaders.map((ldr) => {
         return (
-            <p>Leader {leader.name}</p>
+            <Media tag="li" key={ldr.id}>
+                <Media left middle>
+                    <Media object src={ldr.image} alt={ldr.name} />
+                </Media>
+                <Media body className="ml-5">
+                    <Media heading>
+                        {ldr.name}
+                    </Media>
+                    <p>{ldr.description}</p>
+                    <hr />
+                    <br />
+                </Media>
+            </Media>
         );
     });
 
