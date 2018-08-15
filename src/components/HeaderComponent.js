@@ -116,7 +116,6 @@ class Header extends Component {
           <ModalHeader isOpen={this.state.isModalOpen} toggle={this.toggleModal}>Login</ModalHeader>
           <ModalBody>
             <Form onSubmit={this.handleLogin}>
-             
               <FormGroup>
                 <Label htmlFor="username">Username</Label>
                 <Input type="text" id="username" name="username" required 
