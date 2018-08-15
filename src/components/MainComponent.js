@@ -13,7 +13,7 @@ const mapStateToProps = state => {
     return {
       dishes: state.dishes,
       comments: state.comments,
-      promomotions: state.promomotions,
+      promotions: state.promotions,
       leaders: state.leaders
     };
 };
