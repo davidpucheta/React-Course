@@ -11,9 +11,8 @@ import {
   Col
 } from "reactstrap";
 
-const maxLength = (len) => (val) => !(val) || (val.length <= len);
-const minLength = (len) => (val) => (val) && (val.length >= len);
-
+const maxLength = len => val => !val || val.length <= len;
+const minLength = len => val => val && val.length >= len;
 
 class CommentForm extends React.Component {
   constructor(props) {
@@ -44,7 +43,9 @@ class CommentForm extends React.Component {
           &nbsp; Submit Comment
         </Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}><bold>Submit Comment</bold></ModalHeader>
+          <ModalHeader toggle={this.toggle}>
+            <bold>Submit Comment</bold>
+          </ModalHeader>
           <LocalForm onSubmit={values => this.handleSubmit(values)}>
             <ModalBody>
               <Row className="form-group">
@@ -78,19 +79,17 @@ class CommentForm extends React.Component {
                     id="yourname"
                     name="yourname"
                     placeholder="Your Name"
-                    validators={
-                        {
-                            maxLength: maxLength(15), 
-                            minLength: minLength(3)
-                        }
-                    }
+                    validators={{
+                      maxLength: maxLength(15),
+                      minLength: minLength(3)
+                    }}
                   />
                   <Errors
                     className="text-danger"
                     model=".yourname"
-                   show = "touched"
+                    show="touched"
                     messages={{
-                      maxLength: "Name should be no longer than 15 characters", 
+                      maxLength: "Name should be no longer than 15 characters",
                       minLength: "Name should be longer than 3 characters"
                     }}
                   />
