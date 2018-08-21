@@ -33,7 +33,7 @@ class CommentForm extends React.Component {
 
   handleSubmit(values) {
     this.toggle();
-    this.props.addComment(this.props.dishId, values.rating, values.name, values.comment);
+    this.props.addComment(this.props.dishId, values.rating, values.yourname, values.comment);
   }
 
   render() {
